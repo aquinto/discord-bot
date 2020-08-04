@@ -3,11 +3,16 @@ const client = new Discord.Client();
 
 //holds the discord bot token, located in json file 
 const config = require('./configure.json');
+const { type } = require('os');
 
 
 client.on('ready', ()=>{
     console.log('botBot is online!');
+    client.user.setActivity('use !help', {type: "LISTENING"});
 });
+
+/* validates our command input by making sure 
+that it starts with an exclamation point*/
 function validateCommand(input){
     if(input.content.startsWith("!")){
         return true;
@@ -38,7 +43,7 @@ client.on('message', message => {
             return message.reply("this is a link for the 330 folder: https://bit.ly/330folder");
         }else if(message.content === "!351"){
             return message.reply("this is a link for the 351 folder: https://bit.ly/351folder");
-        }else if(message.content === "!commands"){
+        }else if(message.content === "!help"){
             displayCommands(message);
         }
 });
