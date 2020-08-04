@@ -19,6 +19,8 @@ function validateCommand(input){
     }
     return false;
 }
+/* function displays all the avaiable commands that the user
+can input */
 function displayCommands(input){
         return input.reply("The following commands you can use are: " +
             "\n"+
@@ -28,11 +30,23 @@ function displayCommands(input){
             "\n"+
             "!330"+
             "\n"+
-            "!351"
+            "!351"+
+            "\n"+
+            "!clear"
             );
 }
-
-
+/* function handles the deletion of the last 50 messages inside a text channel*/
+function deleteChatHistory(input){
+    async function deleteCollection(){
+        await input.channel.messages.fetch({
+            limit: 50
+        }).then(messages =>{
+            input.channel.bulkDelete(messages);
+        })
+    }
+    deleteCollection();
+}
+/* event listener for commands */
 client.on('message', message => {
     if(!validateCommand(message)){ return ; }
         if(message.content === "!216"){
@@ -45,6 +59,8 @@ client.on('message', message => {
             return message.reply("this is a link for the 351 folder: https://bit.ly/351folder");
         }else if(message.content === "!help"){
             displayCommands(message);
+        }else if(message.content === "!clear"){
+            deleteChatHistory(message);
         }
 });
 
