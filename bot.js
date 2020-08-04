@@ -5,6 +5,12 @@ const client = new Discord.Client();
 const config = require('./configure.json');
 const { type } = require('os');
 
+/* links to resources for class in an external file  */
+var myModule = require('./index.js');
+var cmsc216 = myModule.link1;
+var cmsc250 = myModule.link2;
+var cmsc330 = myModule.link3;
+var cmsc351 = myModule.link4;
 
 client.on('ready', ()=>{
     console.log('botBot is online!');
@@ -50,13 +56,13 @@ function deleteChatHistory(input){
 client.on('message', message => {
     if(!validateCommand(message)){ return ; }
         if(message.content === "!216"){
-           return message.reply("this is the link for the 216 folder: https://bit.ly/216folder");
+           return message.reply("this is the link for the 216 folder: " + cmsc216);
         }else if(message.content === "!250"){
-            return message.reply("this is the link for the 250 folder: https://bit.ly/250folder");
+            return message.reply("this is the link for the 250 folder: "+ cmsc250);
         } else if(message.content === "!330"){
-            return message.reply("this is a link for the 330 folder: https://bit.ly/330folder");
+            return message.reply("this is a link for the 330 folder: " + cmsc330);
         }else if(message.content === "!351"){
-            return message.reply("this is a link for the 351 folder: https://bit.ly/351folder");
+            return message.reply("this is a link for the 351 folder: " + cmsc351);
         }else if(message.content === "!help"){
             displayCommands(message);
         }else if(message.content === "!clear"){
