@@ -1,15 +1,47 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+//holds the discord bot token, located in json file 
+const config = require('./configure.json');
+
 
 client.on('ready', ()=>{
-    console.log('Logged in as $(client.user.tag}!');
+    console.log('botBot is online!');
 });
-
-client.on('message', msg =>{
-    if(msg.content === 'ping'){
-        msg.reply('pong');
+function validateCommand(input){
+    if(input.content.startsWith("!")){
+        return true;
     }
+    return false;
+}
+function displayCommands(input){
+        return input.reply("The following commands you can use are: " +
+            "\n"+
+            "!216"+
+            "\n"+
+            "!250"+
+            "\n"+
+            "!330"+
+            "\n"+
+            "!351"
+            );
+}
+
+
+client.on('message', message => {
+    if(!validateCommand(message)){ return ; }
+        if(message.content === "!216"){
+           return message.reply("this is the link for the 216 folder: https://bit.ly/216folder");
+        }else if(message.content === "!250"){
+            return message.reply("this is the link for the 250 folder: https://bit.ly/250folder");
+        } else if(message.content === "!330"){
+            return message.reply("this is a link for the 330 folder: https://bit.ly/330folder");
+        }else if(message.content === "!351"){
+            return message.reply("this is a link for the 351 folder: https://bit.ly/351folder");
+        }else if(message.content === "!commands"){
+            displayCommands(message);
+        }
 });
 
-client.login('NzM5NzA2NzM2NzEzMTM4MTk2.XyeXlQ.eyqD0RK6NVrunTrGS3LN7wt9MrY');
+
+client.login(config.token);
