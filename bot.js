@@ -41,7 +41,9 @@ function displayCommands(input){
             "!clear limit : will delete as many messages as the provided limit, \n if no limit is provided then the last 100 messages will be deleted"
             );
 }
-/* function handles the deletion of the last 50 messages inside a text channel*/
+/* function handles the deletion of the last 100 messages inside a text channel 
+if no limit is provided otherwise the limit value determines the amount of messages 
+deleted*/
 function deleteChatHistory(input, limitValue){
     if(limitValue == null){
         var total = 100;
