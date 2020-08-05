@@ -30,15 +30,15 @@ can input */
 function displayCommands(input){
         return input.reply("The following commands you can use are: " +
             "\n"+
-            "!216"+
+            "!216 : will display 216 google drive link"+
             "\n"+
-            "!250"+
+            "!250 : will display 250 google drive link"+
             "\n"+
-            "!330"+
+            "!330 : will display 330 google drive link"+
             "\n"+
-            "!351"+
+            "!351 : will display 351 google drive link"+
             "\n"+
-            "!clear"
+            "!clear : will clear the last 50 text messages sent"
             );
 }
 /* function handles the deletion of the last 50 messages inside a text channel*/
