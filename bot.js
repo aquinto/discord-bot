@@ -20,7 +20,7 @@ client.on('ready', ()=>{
 /* validates our command input by making sure 
 that it starts with an exclamation point*/
 function validateCommand(input){
-    if(input.content.startsWith("!")){
+    if(input.startsWith("!")){
         return true;
     }
     return false;
@@ -52,22 +52,27 @@ function deleteChatHistory(input){
     }
     deleteCollection();
 }
+
 /* event listener for commands */
 client.on('message', message => {
-    if(!validateCommand(message)){ return ; }
-        if(message.content === "!216"){
-           return message.reply("this is the link for the 216 folder: " + cmsc216);
-        }else if(message.content === "!250"){
-            return message.reply("this is the link for the 250 folder: "+ cmsc250);
-        } else if(message.content === "!330"){
-            return message.reply("this is a link for the 330 folder: " + cmsc330);
-        }else if(message.content === "!351"){
-            return message.reply("this is a link for the 351 folder: " + cmsc351);
-        }else if(message.content === "!help"){
-            displayCommands(message);
-        }else if(message.content === "!clear"){
-            deleteChatHistory(message);
-        }
+    let substrings = message.content.split(" ");
+    if(!validateCommand(substrings[0])){ 
+        return ; 
+    }
+    
+    if(substrings[0] === "!216"){
+        return message.reply("this is the link for the 216 folder: " + cmsc216);
+    }else if(substrings[0] === "!250"){
+        return message.reply("this is the link for the 250 folder: "+ cmsc250);
+    } else if(substrings[0] === "!330"){
+        return message.reply("this is a link for the 330 folder: " + cmsc330);
+    }else if(substrings[0] === "!351"){
+        return message.reply("this is a link for the 351 folder: " + cmsc351);
+    }else if(substrings[0] === "!help"){
+        displayCommands(message);
+    }else if(substrings[0] === "!clear"){
+        deleteChatHistory(message);
+    }
 });
 
 
