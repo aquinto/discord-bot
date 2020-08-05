@@ -38,14 +38,25 @@ function displayCommands(input){
             "\n"+
             "!351 : will display 351 google drive link"+
             "\n"+
-            "!clear : will clear the last 50 text messages sent"
+            "!clear limit : will delete as many messages as the provided limit, \n if no limit is provided then the last 100 messages will be deleted"
             );
 }
 /* function handles the deletion of the last 50 messages inside a text channel*/
-function deleteChatHistory(input){
+function deleteChatHistory(input, limitValue){
+    if(limitValue == null){
+        var total = 100;
+        limitValue = total;
+    }else{
+        if(limitValue < 0 || limitValue == 0){
+            return input.reply("Please enter a value greater than 0")
+        }else if(limitValue > 100){
+            return input.reply("Please enter a value less than or equal to 100");
+        }
+    }
+
     async function deleteCollection(){
         await input.channel.messages.fetch({
-            limit: 50
+            limit: limitValue
         }).then(messages =>{
             input.channel.bulkDelete(messages);
         })
@@ -71,7 +82,7 @@ client.on('message', message => {
     }else if(substrings[0] === "!help"){
         displayCommands(message);
     }else if(substrings[0] === "!clear"){
-        deleteChatHistory(message);
+        deleteChatHistory(message, substrings[1]);
     }
 });
 
